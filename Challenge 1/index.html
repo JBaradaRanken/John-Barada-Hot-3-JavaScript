@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+    <!-- Use Bootstrap v5 to style the whole page. -->
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form id="loginForm" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" autocomplete="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" id="password" autocomplete="current-password" required>
+                        <!-- Create a small login form with email and password fields.
+                            The email field must have name=email, type=email, autocomplete=email, and class=form-control   -->
+
+                        <!-- The password field must have name=password, type=password, autocomplete=password, and class=form-control   -->
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <!-- The login button must have type="submit" and class="btn btn-primary" -->
+                </form>
+                <div id="message" class="mt-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+    <script>
+        const form = document.getElementById("loginForm");
+        const message = document.getElementById("message");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const email = form.email.value;
+            const password = form.password.value;
+
+            if (!email || !password) {
+                showMessage("You seem to have forgotten your username and password.", "text-danger");
+                return;
+            }//❏If the user leaves either field blank, display this error message in the DOM: 
+            //"You seem to have forgotten your username and password.
+
+            if (email === "admin@example.com" && password === "password") {
+                showMessage("Welcome back Admin!" , "text-success");
+                //If the user enters "admin@example.com" for the email and 
+                //"password" as the password, display this success message in the DOM: "Welcome back Admin!" 
+            } else {
+                showMessage("That email and password doesn't seem to be right. Try again.", "text-danger");
+            }
+            // All error messages must be displayed in red using the "text-danger" class. Display success messages 
+            // in green using the "text-success" class. Only display either/both messages when appropriate. 
+            //❏	If the user enters an incorrect email or password, display this error message in the DOM: 
+            //"That email and password doesn't seem to be right. Try again."  
+        });
+
+        function showMessage(text, className) {
+            message.innerHTML = text;
+            message.className = className;
+        }
+    </script>
+</body>
+</html>
